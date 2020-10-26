@@ -1,0 +1,153 @@
+<style>
+  .notification-bar {
+    background: {{ section.settings.announcement_bar_bgcolor }};
+    color: {{ section.settings.announcement_bar_textcolor }};
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: "Oswald", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 20.16px;
+    letter-spacing: 0.16em;
+  }
+
+  .navigation {
+    height: 52px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 0;
+    height: 52px;
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 20px;
+    vertical-align: bottom;
+  }
+
+  .center-container {
+    text-transform: uppercase;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 16.8px;
+  }
+
+  .center-container > :not(:last-child) {
+    margin-right: 40px;
+  }
+
+  .right-container {
+    position: absolute;
+    right: 0;
+    padding-right: 40px;
+  }
+
+  .right-container > a > * {
+    vertical-align: bottom;
+  }
+
+  .right-container > :not(:last-child) {
+    margin-right: 20px;
+  }
+</style>
+
+
+{% if section.settings.announcement_bar %}
+  <div class="notification-bar">{{ section.settings.announcement_bar_msg }}</div>
+{% endif %}
+
+<div class="navigation">
+
+  <div class="logo-container">
+
+    {% if section.settings.logo %}
+      <a href="#">
+        <img class="logo" src="{{ section.settings.logo | img_url: "300x300" }}" alt="logo" />
+      </a>
+
+    {% endif %}
+  </div>
+
+  <div class="center-container">
+    {% if section.settings.header_link_list %}
+      {% for link in linklists[ section.settings.header_link_list ].links %}
+        <a href="{{ link.href }}">{{link.title}}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="right-container">
+    <a href="#">{% include 'icon-search' %}</a>
+    <a href="#">{% include 'icon-login' %}</a>
+    <a href="#">{% include 'icon-cart' %}</a>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Header",
+
+    "settings": [
+
+      { "type": "header", "content": "Logo Settings" },
+
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Choose Logo"
+      },
+
+      { "type": "header", "content": "Menu Settings" },
+
+      {
+        "type": "link_list",
+        "id": "header_link_list",
+        "label": "Choose the main menu"
+      },
+
+      { "type": "header", "content": "Announcement Bar" },
+
+      {
+        "type": "checkbox",
+        "id": "announcement_bar",
+        "label": "Show Announcement Bar",
+        "default": false
+      },
+
+      {
+        "type":"text",
+        "id": "announcement_bar_msg",
+        "label": "Announcement Bar Message",
+        "default":"It's Announcement Bar Message"
+      },
+
+      {
+        "type":"color",
+        "id": "announcement_bar_bgcolor",
+        "label": "Background Color",
+        "default":"#fbfbfb"
+      },
+
+      {
+        "type":"color",
+        "id": "announcement_bar_textcolor",
+        "label": "Text Color",
+        "default": "#000000"
+      }
+    ]
+  }
+{% endschema %}

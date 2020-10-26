@@ -1,0 +1,90 @@
+<div class="product-collection-list container">
+    <div class="product-collection-list-row row">
+
+        <div class="col product-collection-list-row_item">
+            <img src="http://via.placeholder.com/328x334" alt="Product Item">
+            <a href="#" class="product-collection-list-row_item-link" >
+                Bumber Plates
+            </a>
+        </div>
+
+        <div class="col product-collection-list-row_item">2</div>
+
+        <div class="col product-collection-list-row_item">3</div>
+
+        <div class="col product-collection-list-row_item">4</div>
+
+    </div>
+</div>
+  
+  
+<style>
+
+.product-collection-list {
+}   
+.product-collection-list-row_item {
+    height: 362px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+.product-collection-list-row_item-link {
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 168%;
+    /* or 20px */
+    text-align: center;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: #000000;
+
+    margin-top: 12px;
+}
+
+/* Responsive */
+@media screen and (max-width: 1920px) {
+}
+@media screen and (max-width: 1440px) {
+}
+@media screen and (max-width: 768px) {
+}
+</style>
+  
+  {% schema %}
+  {
+    "name": "Product Collection List",
+
+    "settings": [
+    ],
+
+    "blocks": [
+        {
+            "type": "featured_collection",
+            "name": "Collection",
+
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ],
+  
+    "presets": [
+      {
+        "name": "Product Collection List",
+        "category": "Collection"
+      }
+    ]
+  }
+  {% endschema %}
+  

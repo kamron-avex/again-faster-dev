@@ -1,0 +1,320 @@
+<div class="full-width-image-section">
+  <div class="full-width-image-section_container">
+
+      <div class="full-width-image-section_container-content">
+
+        <h2 class="full-width-image-section_container-content_heading" >
+          {{ section.settings.title }}
+        </h2>
+
+        <div class='full-width-image-section_container-content_description'>
+          {{ section.settings.description }}
+        </div>
+
+        <a href="{{ section.settings.button_link }}" class="full-width-image-section_container-content_button">
+          {{ section.settings.button_label }} 
+          {% include 'icon-arrow-right' %}
+        </a>
+      </div> 
+    
+  </div>
+</div>
+
+
+<style>
+
+.full-width-image-section {
+  width: 100%;
+  height: 100vh;
+
+  background: url("{{ section.settings.backdrop | img_url: 'master' }}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+{% assign position = section.settings.content_layout %}
+
+.full-width-image-section_container{
+  display: grid;
+  height: 100%;
+  padding: 40px;
+
+  grid-template-areas: 
+            "{% if position == 'top_left'  %} content {% else %} . {% endif %} {% if position == 'top_center'  %} content {% else %} . {% endif %} {% if position == 'top_right'  %} content {% else %} . {% endif %}"
+            "{% if position == 'left'  %} content {% else %} . {% endif %} {% if position == 'center'  %} content {% else %} . {% endif %} {% if position == 'right'  %} content {% else %} . {% endif %}"
+            "{% if position == 'bottom_left'  %} content {% else %} . {% endif %} {% if position == 'bottom_center'  %} content {% else %} . {% endif %} {% if position == 'bottom_right'  %} content {% else %} . {% endif %}";
+}
+
+.full-width-image-section_container-content {
+  display: flex;
+  flex-direction: column;
+  grid-area: content;
+
+  {% if position == "top_right" or position == "right" or position == "bottom_right" %}
+  text-align: right;
+  align-items: flex-end;
+  {% endif %}
+
+  {% if position == "top_center" or position == "center" or position == "bottom_center" %}
+  text-align: center;
+  align-items: center;
+  {% endif %}
+
+  {% if position == "top_left" or position == "left" or position == "bottom_left" %}
+  text-align: left;
+  align-items: flex-start;
+  {% endif %}
+
+  {% if position == "bottom_left" or position == "bottom_center" or position == "bottom_right" %}
+  justify-content: flex-end;
+  {% endif %}
+
+  {% if position == "top_left" or position == "top_center" or position == "top_right" %}
+  justify-content: flex-start;
+  {% endif %}
+
+  {% if position == "left" or position == "center" or position == "right" %}
+  justify-content: center;
+  {% endif %}
+}
+
+.full-width-image-section_container-content_heading {
+
+  /* 1440/H1 */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  line-height: 130%;
+  /* or 78px */
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+
+  /* max-width: 50%; */
+
+  /* AF/White */
+  {% if section.settings.heading_style == 'white' %}
+  color: #FFFFFF;
+  {% else %}
+  color: #000000;
+  {% endif %}
+}
+
+.full-width-image-section_container-content_description  {
+  margin-bottom: 40px;
+  max-width: 523.32px;
+}
+.full-width-image-section_container-content_description p {
+
+  /* body/regular */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 167.5%;
+  /* or 23px */
+
+  /* AF/White */
+  {% if section.settings.description_style == 'white' %}
+  color: #FFFFFF;
+  {% else %}
+  color: #000000;
+  {% endif %}
+
+}
+
+.full-width-image-section_container-content_button {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.175em;
+  text-transform: uppercase;
+
+  padding: 20px 24px;
+
+  width: 236px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  {% if section.settings.button_style == "white" %}
+    border: 1px solid white;
+    color: #fff;
+  {% else %}
+    border: 1px solid black;
+    color: #000;
+  {% endif %}
+
+  transition: all .3s;
+}
+
+.full-width-image-section_container-content_button svg {
+  {% if section.settings.button_style == "white" %}
+    stroke: #fff;
+  {% endif %}
+
+  {% if section.settings.button_style == "black" %}
+    stroke: #000;
+  {% endif %}
+}
+
+.full-width-image-section_container-content_button:hover {
+  {% if section.settings.button_style == "white" %}
+    background: #fff;
+    color: #000;
+  {% else %}
+    background: #000;
+    color: #fff;
+  {% endif %}
+}
+
+.full-width-image-section_container-content_button:hover svg {
+  {% if section.settings.button_style == "white" %}
+    stroke: #000;
+  {% else %}
+    stroke: #fff;
+  {% endif %}
+}
+
+/* Responsive */
+@media screen and (max-width: 1920px) {
+    .full-width-image-section_container-content_heading {
+      font-size: 60px;
+    }
+}
+@media screen and (max-width: 1440px) {
+  .full-width-image-section_container-content_heading {
+      font-size: 52px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .full-width-image-section_container-content_heading {
+      font-size: 40px;
+  }
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "Full width Image",
+
+  "class": "index-section index-section--flush",
+
+  "settings": [
+  /* Image Config*/
+  { "type":"header", "content": "Section Image" },
+  {
+    "type": "image_picker",
+    "id": "backdrop",
+    "label": "Backdrop"
+  },
+
+  /* Content Config*/
+  { "type":"header", "content": "Section Content" },
+
+  {
+    "type": "select",
+    "id": "content_layout",
+    "label": "Content Layout",
+
+    "default": "center",
+
+    "options": [
+      /* Middle */
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" },
+
+      /* Top */
+      { "value": "top_left", "label": "Top Left" },
+      { "value": "top_center", "label": "Top Center" },
+      { "value": "top_right", "label": "Top Right" },
+
+      /* Bottom */
+      { "value": "bottom_left", "label": "Bottom Left" },
+      { "value": "bottom_center", "label": "Bottom Center" },
+      { "value": "bottom_right", "label": "Bottom Right" }
+    ]
+  },
+
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "Full width image with text"
+  },
+
+  {
+    "type": "select",
+    "id": "heading_style",
+    "label": "Title Color",
+    "default": "white",
+    "options": [
+      { "value": "white", "label": "White" },
+      { "value": "black", "label": "Black" }
+    ]
+  },
+
+  {
+    "type": "richtext",
+    "id": "description",
+    "label": "Text"
+  },
+
+  {
+    "type": "select",
+    "id": "description_style",
+    "label": "Text Color",
+    "default": "white",
+    "options": [
+      { "value": "white", "label": "White" },
+      { "value": "black", "label": "Black" }
+    ]
+  },
+
+  /* Button Config*/
+  { "type":"header", "content": "Button" },
+
+  {
+    "type": "text",
+    "id": "button_label",
+    "label": "Button label"
+  },
+
+  {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button link"
+  },
+
+  {
+    "type": "select",
+    "id": "button_style",
+    "label": "Button Style",
+    "default": "white",
+    "options": [
+      {
+        "value": "white",
+        "label": "White"
+      },
+      {
+        "value": "black",
+        "label": "Black"
+      }
+    ]
+  }
+],
+
+  "presets": [
+    {
+      "name": "Full width image with text",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

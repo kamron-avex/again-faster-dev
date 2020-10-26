@@ -1,0 +1,36 @@
+
+/* Theme Color Scheme */
+$primary-black : #000000;
+$primary-white : #000000;
+$primary-gold  : #C2A578;
+
+$secondary-light_grey : #F8F8F8;
+$secondary-text_grey  : #767676;
+$secondary-grey       : #C4C4C4;
+
+$functional-green : #6FCF97;
+$functional-red   : #DA0000;
+
+/* Breakpoints */
+$screen-large: 1920px;
+$screen-desktop: 1440px;
+$screen-tablet: 768px;
+
+/* Typograpgy */
+.heading {
+    font-family: "Open Sans";
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.heading .h1 {
+    @media screen and (max-width: $screen-large) {
+        font-size: 60px;
+    }
+    @media screen and (max-width: $screen-desktop) {
+        font-size: 52px;
+    }
+    @media screen and (max-width: $screen-tablet) {
+        font-size: 40px;
+    }
+}
