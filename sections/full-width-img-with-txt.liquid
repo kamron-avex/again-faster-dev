@@ -1,20 +1,27 @@
-<div class="full-width-image-section">
-  <div class="full-width-image-section_container">
+<div class="full-width-image-section-{{ section.id }}">
+  <div class="full-width-image-section_container-{{ section.id }} container">
 
-      <div class="full-width-image-section_container-content">
+      <div class="full-width-image-section_container-content-{{ section.id }}">
 
-        <h2 class="full-width-image-section_container-content_heading" >
+        {% if section.settings.title %}
+        <h2 class="full-width-image-section_container-content_heading-{{ section.id }}" >
           {{ section.settings.title }}
         </h2>
+        {% endif %}
 
-        <div class='full-width-image-section_container-content_description'>
+        {% if section.settings.description %}
+        <div class='full-width-image-section_container-content_description-{{ section.id }}'>
           {{ section.settings.description }}
         </div>
+        {% endif %}
 
-        <a href="{{ section.settings.button_link }}" class="full-width-image-section_container-content_button">
+        {% if section.settings.button_link and section.settings.button_label %}
+        <a href="{{ section.settings.button_link }}" class="full-width-image-section_container-content_button-{{ section.id }}">
           {{ section.settings.button_label }} 
           {% include 'icon-arrow-right' %}
         </a>
+        {% endif %}
+        
       </div> 
     
   </div>
@@ -23,7 +30,7 @@
 
 <style>
 
-.full-width-image-section {
+.full-width-image-section-{{ section.id }} {
   width: 100%;
   height: 100vh;
 
@@ -31,14 +38,18 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  margin-bottom: 55px;
 }
 
 {% assign position = section.settings.content_layout %}
 
-.full-width-image-section_container{
+.full-width-image-section_container-{{ section.id }}{
   display: grid;
   height: 100%;
-  padding: 40px;
+
+  padding-bottom:40px;
+  padding-top:40px;
 
   grid-template-areas: 
             "{% if position == 'top_left'  %} content {% else %} . {% endif %} {% if position == 'top_center'  %} content {% else %} . {% endif %} {% if position == 'top_right'  %} content {% else %} . {% endif %}"
@@ -46,7 +57,7 @@
             "{% if position == 'bottom_left'  %} content {% else %} . {% endif %} {% if position == 'bottom_center'  %} content {% else %} . {% endif %} {% if position == 'bottom_right'  %} content {% else %} . {% endif %}";
 }
 
-.full-width-image-section_container-content {
+.full-width-image-section_container-content-{{ section.id }} {
   display: flex;
   flex-direction: column;
   grid-area: content;
@@ -79,7 +90,7 @@
   {% endif %}
 }
 
-.full-width-image-section_container-content_heading {
+.full-width-image-section_container-content_heading-{{ section.id }} {
 
   /* 1440/H1 */
   font-family: "Open Sans";
@@ -90,7 +101,7 @@
   letter-spacing: 0.24em;
   text-transform: uppercase;
 
-  /* max-width: 50%; */
+  max-width: 490px;
 
   /* AF/White */
   {% if section.settings.heading_style == 'white' %}
@@ -100,11 +111,11 @@
   {% endif %}
 }
 
-.full-width-image-section_container-content_description  {
+.full-width-image-section_container-content_description-{{ section.id }}  {
   margin-bottom: 40px;
   max-width: 523.32px;
 }
-.full-width-image-section_container-content_description p {
+.full-width-image-section_container-content_description-{{ section.id }} p {
 
   /* body/regular */
   font-family: "Open Sans";
@@ -123,7 +134,7 @@
 
 }
 
-.full-width-image-section_container-content_button {
+.full-width-image-section_container-content_button-{{ section.id }} {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
@@ -143,16 +154,16 @@
 
   {% if section.settings.button_style == "white" %}
     border: 1px solid white;
-    color: #fff;
+    color: #fff !important;
   {% else %}
     border: 1px solid black;
-    color: #000;
+    color: #000 !important;
   {% endif %}
 
   transition: all .3s;
 }
 
-.full-width-image-section_container-content_button svg {
+.full-width-image-section_container-content_button-{{ section.id }} svg {
   {% if section.settings.button_style == "white" %}
     stroke: #fff;
   {% endif %}
@@ -162,17 +173,17 @@
   {% endif %}
 }
 
-.full-width-image-section_container-content_button:hover {
+.full-width-image-section_container-content_button-{{ section.id }}:hover {
   {% if section.settings.button_style == "white" %}
     background: #fff;
-    color: #000;
+    color: #000 !important;
   {% else %}
     background: #000;
-    color: #fff;
+    color: #fff !important;
   {% endif %}
 }
 
-.full-width-image-section_container-content_button:hover svg {
+.full-width-image-section_container-content_button-{{ section.id }}:hover svg {
   {% if section.settings.button_style == "white" %}
     stroke: #000;
   {% else %}
@@ -182,17 +193,17 @@
 
 /* Responsive */
 @media screen and (max-width: 1920px) {
-    .full-width-image-section_container-content_heading {
+    .full-width-image-section_container-content_heading-{{ section.id }} {
       font-size: 60px;
     }
 }
 @media screen and (max-width: 1440px) {
-  .full-width-image-section_container-content_heading {
+  .full-width-image-section_container-content_heading-{{ section.id }} {
       font-size: 52px;
   }
 }
 @media screen and (max-width: 768px) {
-  .full-width-image-section_container-content_heading {
+  .full-width-image-section_container-content_heading-{{ section.id }} {
       font-size: 40px;
   }
 }
@@ -202,8 +213,6 @@
 {% schema %}
 {
   "name": "Full width Image",
-
-  "class": "index-section index-section--flush",
 
   "settings": [
   /* Image Config*/

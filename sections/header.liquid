@@ -15,86 +15,414 @@
     letter-spacing: 0.16em;
   }
 
-  .navigation {
+  .notification-bar a:hover {
+    color: #000 !important;
+  }
+
+
+  .navigation-wrapper {
+    width: 100%;
     height: 52px;
-    background: #ffffff;
+    background: #fff;
+
+    display: flex;
+    align-items: center;
+}
+
+.navigation-wrapper-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    width: 100%;
+
+
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    padding: 0 24px;
+}
+
+.navigation-wrapper-container_logo {
+    display: flex;
+    align-items: center;
+}
+
+.navigation-wrapper-container_items {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-  }
 
-  .logo-container {
-    position: absolute;
-    left: 0;
-    height: 52px;
-    padding-left: 40px;
+    gap: 40px;
+
+}
+
+.navigation-wrapper-container_items-item {
+    font-family: "Open Sans";
+    font-size: 12px;
+    letter-spacing: 0.175em;
+    text-transform: uppercase;
+    color: #000000 !important;
+    text-decoration: none;
+}
+
+.navigation-wrapper-container_items-item:last-child {
+    color: red;
+}
+
+.navigation-wrapper-container_items-item:hover { color: #000 !important; }
+
+.navigation-wrapper-container_icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navigation-wrapper-container_icons-icon { margin-left: 16px; text-decoration: none;}
+.navigation-wrapper-container_icons-icon:hover { color: #000 !important;}
+
+.navigation-wrapper-container_hamburger {
+    display: none;
+}
+
+.mobile-navigation-wrapper {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 9999;
+
+    background: #fff;
+}
+
+/* Mobile */
+.mobile-navigation-wrapper {
+    width: 100%;
+}
+
+.mobile-navigation-wrapper-container {
+    width: 100%;
+    padding: 48px 24px 0 24px;
+
     display: flex;
     align-items: center;
-  }
 
-  .logo {
-    height: 20px;
-    vertical-align: bottom;
-  }
+    flex-direction: column;
+    flex: 1;
+}
 
-  .center-container {
-    text-transform: uppercase;
-    font-family: "Open Sans", sans-serif;
+.mobile-navigation-wrapper-container {
+    justify-self: flex-start;
+}
+
+.mobile-navigation-wrapper-container_search {
+    width: 100%;
+    border-radius: 88px;
+
+    padding: 15px 15px;
+
+    border: none !important;
+    background: #F1F1F1;
+
+    /* body/regular */
+    font-family: "Open Sans";
+    font-size: 14px;
+    line-height: 167.5%;
+    color: #000000;
+}
+
+.mobile-navigation-wrapper-container_search:focus {
+    outline: none;
+}
+
+.mobile-navigation-wrapper-container_items {
+    margin-top: 16px;
+
+    display: flex;
+
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+
+}
+
+.mobile-navigation-wrapper-container_items-item {
+    width: 100%;
+    height: 49px;
+    border-bottom: 1px solid #f1f1f1;
+
+    display: flex;
+    align-items: center;
+
+    font-family: "Open Sans";
     font-size: 12px;
-    font-style: normal;
-    line-height: 16.8px;
-  }
+    line-height: 140%;
+    letter-spacing: 0.175em;
+    text-transform: uppercase;
+    color: #000000 !important;
 
-  .center-container > :not(:last-child) {
-    margin-right: 40px;
-  }
+    text-decoration: none !important;
 
-  .right-container {
-    position: absolute;
-    right: 0;
-    padding-right: 40px;
-  }
+}
 
-  .right-container > a > * {
-    vertical-align: bottom;
-  }
+.mobile-navigation-wrapper-container_close {
+    width: 100%;
+    margin-bottom: 8px;
+}
 
-  .right-container > :not(:last-child) {
-    margin-right: 20px;
-  }
+.mobile-navigation-wrapper-container_account {
+    height: 55px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f1f1f1;
+
+
+    /* body-s/regular */
+    font-family: "Open Sans";
+    font-size: 12px;
+    color: #000000;
+
+}
+
+.mobile-navigation-wrapper-container_account img { margin-right: 10px; }
+
+
+.navigation-wrapper_search {
+    width: 100%;
+    height: 0px;
+
+    background: #fff;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    overflow: hidden;
+
+    transition: all .3s;
+}
+
+.navigation-wrapper_search-bar {
+    width: 902px;
+
+    border: 1px solid #c4c4c4;
+    padding: 24px;
+
+
+    /* body/regular */
+    font-family: "Open Sans";
+    font-size: 14px;
+    line-height: 167.5%;
+    /* or 23px */
+
+    color: #000000;
+
+
+}
+
+.navigation-wrapper_search-bar:focus {
+    outline: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navigation-wrapper-container_items {
+        display: none;
+    }
+
+    .navigation-wrapper-container_icons {
+        display: flex;
+    }
+
+    .navigation-wrapper-container {
+        padding: 0 24px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .navigation-wrapper-container_logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navigation-wrapper-container_logo img {
+        height: 20px;
+    }
+
+
+    .navigation-wrapper-container_hamburger {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .navigation-wrapper-container_icons-icon.icon-search { display: none; }
+    .navigation-wrapper_search { display: none; visibility: hidden; height: 0; }
+    .navigation-wrapper_search-bar { display: none; visibility: hidden; height: 0; }
+
+
+}
+
+@media screen and ( max-width: 930px ) { .navigation-wrapper-container_items { gap: 24px; }}
+@media screen and ( max-width: 842px ) { .navigation-wrapper-container_items { gap: 16px; }}
+@media screen and ( max-width: 817px ) { .navigation-wrapper-container_items { gap: 8px; }}
+
+@media screen and (max-width: 375px) {
+    .navigation-wrapper-container_icons-icon.icon-account {
+        display: none;
+    }
+
+    
+    .navigation-wrapper-container_logo img {
+        height: 16px;
+    }
+}
+
 </style>
 
 
 {% if section.settings.announcement_bar %}
-  <div class="notification-bar">{{ section.settings.announcement_bar_msg }}</div>
+  <div class="notification-bar">
+    {% if section.settings.announcement_bar_link %}
+    <a href="{{ section.settings.announcement_bar_link }}" >
+      {{ section.settings.announcement_bar_msg }}
+    </a>
+    {% else %}
+    {{ section.settings.announcement_bar_msg }}
+    {% endif %}
+  </div>
 {% endif %}
 
-<div class="navigation">
 
-  <div class="logo-container">
 
-    {% if section.settings.logo %}
-      <a href="#">
-        <img class="logo" src="{{ section.settings.logo | img_url: "300x300" }}" alt="logo" />
-      </a>
+<div class="navigation-wrapper" id="navigation-wrapper">
+  <div class="navigation-wrapper-container">
 
-    {% endif %}
-  </div>
+      <div class="navigation-wrapper-container_hamburger">
+          <a href="#" class="mobile-navigation-trigger" >{% include 'icon-hamburger' %}</a>
+      </div>
 
-  <div class="center-container">
-    {% if section.settings.header_link_list %}
-      {% for link in linklists[ section.settings.header_link_list ].links %}
-        <a href="{{ link.href }}">{{link.title}}</a>
-      {% endfor %}
-    {% endif %}
-  </div>
-  <div class="right-container">
-    <a href="#">{% include 'icon-search' %}</a>
-    <a href="#">{% include 'icon-login' %}</a>
-    <a href="#">{% include 'icon-cart' %}</a>
+      <div class="navigation-wrapper-container_logo">
+          <a href="#"><img src="{{ section.settings.logo | img_url: 'master' }}" alt="Again Faster"></a>
+      </div>
+
+      <nav class="navigation-wrapper-container_items">
+          {% if section.settings.header_link_list %}
+          {% for link in linklists[ section.settings.header_link_list ].links %}
+            <a href="{{ link.href }}" class="navigation-wrapper-container_items-item" >
+              {{link.title}}
+            </a>
+          {% endfor %}
+          {% endif %}
+      </nav>
+
+      <div class="navigation-wrapper-container_icons">
+          <a href="#" class="navigation-wrapper-container_icons-icon icon-search" id="navigation-search-button" >
+              {% include 'icon-search' %}
+          </a>
+
+          <a href="#" class="navigation-wrapper-container_icons-icon icon-account">
+              {% include 'icon-login' %}
+          </a>
+
+          <a href="#" class="navigation-wrapper-container_icons-icon icon-bag">
+              {% include 'icon-cart' %}
+          </a>
+      </div>
+
+
   </div>
 </div>
+
+<div class="navigation-wrapper_search" id="navigation-search-wrapper">
+  <input type="text" class="navigation-wrapper_search-bar" placeholder="Search" >
+</div>
+
+<div class="mobile-navigation-wrapper" id="mobile-navigation-wrapper" >
+  <div class="mobile-navigation-wrapper-container">
+
+      <div class="mobile-navigation-wrapper-container_close">
+          <a href="#" class="mobile-navigation-trigger">
+              <img src="assets/icons/x.svg" alt="">
+          </a>
+      </div>
+
+      <input type="text" class="mobile-navigation-wrapper-container_search" placeholder="Search" >
+      <div class="mobile-navigation-wrapper-container_items">
+
+        {% if section.settings.header_link_list %}
+        {% for link in linklists[ section.settings.header_link_list ].links %}
+          <a href="{{ link.href }}" class="mobile-navigation-wrapper-container_items-item" >
+            {{link.title}}
+          </a>
+        {% endfor %}
+        {% endif %}
+  
+      </div>
+
+      <a class="mobile-navigation-wrapper-container_account">
+          <img src="assets/icons/account.svg" alt="">
+          Account
+      </a>
+  </div>
+
+</div>
+
+
+<script>
+
+  const toggleNavigationButton = document.getElementsByClassName('mobile-navigation-trigger'),
+  mobileNavigationWrapper = document.getElementById('mobile-navigation-wrapper'),
+  mainNavigationWrapper = document.getElementById('navigation-wrapper');
+
+  const toggleSearchButton = document.getElementById('navigation-search-button'),
+      searchWrapper = document.getElementById('navigation-search-wrapper');
+
+
+  // Mobile Navigation
+  let isMobileNavigationOpen = false;
+  toggleNavigationButton[0].onclick = () => { isMobileNavigationOpen = !isMobileNavigationOpen; toggleNavigation(); }
+  toggleNavigationButton[1].onclick = () => { isMobileNavigationOpen = !isMobileNavigationOpen; toggleNavigation(); }
+
+  function toggleNavigation () {
+      if ( isMobileNavigationOpen ) {
+          mobileNavigationWrapper.style.display = 'flex';
+          mainNavigationWrapper.style.display = 'none'
+
+      } else { 
+          mobileNavigationWrapper.style.display = 'none';
+          mainNavigationWrapper.style.display = 'flex'
+      }
+  }
+
+
+  let isMainSearchOpen = false;
+
+  toggleSearchButton.onclick = () => { isMainSearchOpen = !isMainSearchOpen; toggleMainSearch() }
+
+  function toggleMainSearch () {
+      if ( isMainSearchOpen ) {
+          searchWrapper.style.display = 'flex';
+          setTimeout(() => searchWrapper.style.height = '100px', 10)
+          searchWrapper.style.opacity = '1';
+
+      } else { 
+          setTimeout(() => searchWrapper.style.display = 'none', 300)
+          searchWrapper.style.height = '0';
+          searchWrapper.style.opacity = '0';
+      }
+  }
+
+
+</script>
 
 
 {% schema %}
@@ -147,6 +475,12 @@
         "id": "announcement_bar_textcolor",
         "label": "Text Color",
         "default": "#000000"
+      },
+
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Link"
       }
     ]
   }

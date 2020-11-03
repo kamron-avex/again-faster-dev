@@ -1,0 +1,206 @@
+<div class="container images-side-by-side">
+    <div class="row images-side-by-side_row">
+
+        {% for block in section.blocks %}
+        <div class="images-side-by-side-section">
+            <img src="{{ block.settings.image | img_url: "master" }}" class="images-side-by-side-section_image" alt="Image">
+
+            <div class="images-side-by-side-section_content">
+                <h3 class="images-side-by-side-section_content-heading">{{ block.settings.heading }}</h3>
+
+                <a href={{ block.settings.button_link }} class="images-side-by-side-section_content-button" >
+                    {{ block.settings.button_label }}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+  
+<style>
+
+.images-side-by-side-section {
+    display: flex;
+    flex-direction: column;
+
+    padding: 55px 0;
+}
+
+.images-side-by-side_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+
+.images-side-by-side-section_image {
+    object-fit: cover;
+
+    width: 620px;
+    height: 620px;
+}
+
+.images-side-by-side-section_content {
+    /* width: 100%; */
+    /* align-self: flex-start; */
+    margin-top: 30px;
+
+}
+
+.images-side-by-side-section_content-heading {
+    /* 1440/H3(Bold) */
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 130%;
+    /* or 31px */
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000;
+}
+
+{% assign button = "images-side-by-side-section_content-button" %}
+.{{button}} {
+
+    /* button/primary */
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.175em;
+    text-transform: uppercase;
+
+    /* Primary/Black */
+    color: #000000 !important;
+    position: relative;
+
+}
+
+.{{ button }}::after {
+    content: '';
+
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+
+    height: 100%;
+    width: 70%;
+
+    border-bottom: 1px solid #000;
+    transition: all .4s;
+
+}
+
+.{{ button }}:hover { color: #000; text-decoration: none; }
+.{{ button }}:hover::after { width: 100%; }
+  
+/* Responsive */
+
+/* Desktop */
+@media screen and (max-width: 1440px) {
+    .images-side-by-side-section_image {
+        height: 760px;
+    }  
+
+    .images-side-by-side_row {
+        grid-gap: 16px;
+    }
+
+    .images-side-by-side-section_content-heading {
+        font-size: 24px;
+    }
+
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+    .images-side-by-side-section_image {
+        height: 437px;
+    } 
+
+    .images-side-by-side_row {
+        grid-gap: 8px;
+    } 
+
+    .images-side-by-side-section_content-heading {
+        font-size: 20px;
+    }
+}
+
+/* Phone */
+@media screen and (max-width: 375px) {
+    .images-side-by-side-section_image {
+        height: 421px;
+    }  
+
+    .images-side-by-side_row {
+        grid-gap: 48px;
+        grid-template-columns: 1fr;
+    }
+
+    .images-side-by-side-section_content-heading {
+        font-size: 18px;
+    }
+
+    .images-side-by-side {
+        padding: 24px;
+    }
+}
+
+</style>
+  
+  {% schema %}
+  {
+    "name": "Images side by side",
+    "max_blocks": 2,
+  
+  
+    "settings": [
+    ],
+
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Image",
+
+            "settings": [
+                {
+                    "id": "image",
+                    "type": "image_picker",
+                    "label": "Image"
+                },
+
+                {
+                    "id": "heading",
+                    "type": "text",
+                    "label": "Heading"
+                },
+
+                { "type": "header", "content": "Button" },
+
+                {
+                    "id": "button_label",
+                    "label": "Button Label",
+                    "type": "text"
+                },
+
+                {
+                    "id": "button_link",
+                    "label": "Button Link",
+                    "type": "url"
+                }
+            ]
+        }
+    ],
+  
+    "presets": [
+      {
+        "name": "Images side by side",
+        "category": "Image"
+      }
+    ]
+  }
+  {% endschema %}
+  

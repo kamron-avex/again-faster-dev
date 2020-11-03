@@ -1,0 +1,134 @@
+<div class="container section-{{ section.id }}">
+    <div class="row section-{{ section.id }}-grid">
+
+        {% for block in section.blocks %}
+            <div class="section-{{ section.id }}-item">
+                <img src="{{ block.settings.icon | img_url: '58x58' }}" class="section-{{ section.id }}-item_icon" alt="">
+                <h5 class="section-{{ section.id }}-item_heading">{{ block.settings.heading }}</h5>
+                <div class="section-{{ section.id }}-item_body">{{ block.settings.body }}</div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+  
+<style>
+
+.section-{{ section.id }} {
+    padding: 55px 0;
+
+    margin-bottom: 55px;
+}
+
+.section-{{ section.id }}-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+
+    grid-gap: 16px;
+}
+
+.section-{{ section.id }}-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-{{ section.id }}-item_icon {
+    width: 58px;
+    height: 58px;
+    
+    margin-bottom: 20px;
+}
+
+.section-{{ section.id }}-item_heading {
+ 
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 168%;
+    /* or 20px */
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    /* AF/Dark grey */
+    color: #353535;
+}
+
+
+.section-{{ section.id }}-item_body {
+
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 167.5%;
+    color: #353535;
+
+}
+
+
+/* Responsive */
+/* Desktop */
+@media screen and (max-width: 1440px) {}
+/* Tablet */
+@media screen and (max-width: 768px) {
+
+    .section-{{ section.id }}-grid {
+        overflow-x: scroll;
+    overflow-y: hidden;
+    white-space:nowrap
+    }
+
+}
+/* Phone */
+@media screen and (max-width: 375px) {}
+
+</style>
+  
+{% schema %}
+  {
+    "name": "6 Grid",
+
+    "max_blocks": 6,
+
+    "settings": [],
+
+    "blocks": [
+        {   
+            "type": "Quote",
+            "name": "Block",
+
+            "settings": [
+
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Icon"
+                },
+
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading"
+                },
+
+                {
+                    "type": "richtext",
+                    "id": "body",
+                    "label": "Body Text"
+                }
+
+            ]
+        }
+    ],
+
+    "presets": [
+      {
+        "name": "6 Grid",
+        "category": "Text"
+      }
+    ]
+  }
+  {% endschema %}
+  

@@ -1,4 +1,5 @@
-<div class="image-collage-container row">
+<div class="container-fluid image-collage-container">
+<div class="row">
 
     <div class="col-7">
         <img class="image-collage-container_large-image" src="{{ section.settings.large_image | img_url: "master" }}" />
@@ -22,12 +23,15 @@
         </div>
     </div>
 </div>
-  
+</div>
   
 <style>
+
+
 .image-collage-container {
     width: 100%;
-    height: {{ section.settings.large_image.height }}px;
+    height: 1024px;
+
 
     {% if section.settings.large_image_position == 'left' %}
     direction: ltr;

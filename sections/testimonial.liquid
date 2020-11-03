@@ -1,0 +1,133 @@
+<div class="container testimonial-{{section.id}}">
+    <h5 class="testimonial-subheader-{{section.id}}">{{ section.settings.subheader }}</h5>
+    <div class="testimonial-review-{{section.id}}" >{{ section.settings.review }}</div>
+    <p class="testimonial-customer-{{section.id}}" >
+        <span style="color: #C2A578;" >/</span>
+        {{ section.settings.customer }}
+    </p>
+</div>
+  
+<style>
+.testimonial-{{section.id}} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    padding: 55px 0;
+
+    margin-bottom: 55px;
+}
+
+.testimonial-subheader-{{section.id}} {
+
+    /* 1440/H5 */
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 168%;
+    /* or 20px */
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: #000000;
+
+    margin-bottom: 40px;
+
+}
+
+
+.testimonial-review-{{section.id}} p {
+
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 167%;
+    /* or 40px */
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    /* Primary/Black */
+    color: #000000 !important;
+}
+
+.testimonial-customer-{{section.id}} {
+
+    /* body/regular */
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 167.5%;
+    /* or 23px */
+    text-align: center;
+    color: #000;
+
+    margin-top: 40px;
+
+}
+
+/* Responsive */
+
+/* Desktop */
+@media screen and (max-width: 1440px) {
+    .testimonial-subheader-{{section.id}} { margin-bottom: 40px; }
+    .testimonial-review-{{section.id}} p { font-size: 24px; }
+    .testimonial-customer-{{section.id}} { margin-top: 40px; }
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+    .testimonial-subheader-{{section.id}} { margin-bottom: 40px; }
+    .testimonial-review-{{section.id}} p { font-size: 18px; }
+    .testimonial-customer-{{section.id}}{ margin-top: 40px; }
+}
+
+/* Phone */
+@media screen and (max-width: 375px) {
+    .testimonial-subheader-{{section.id}} { margin-bottom: 24px; }
+    .testimonial-review-{{section.id}} p { font-size: 18px; }
+    .testimonial-customer-{{section.id}} { margin-top: 24px; }
+}
+
+</style>
+  
+  {% schema %}
+  {
+    "name": "Testimonial",
+    
+    "settings": [
+
+        {
+            "type": "text",
+            "id":"subheader",
+            "label": "Subheader"
+        },
+
+        {
+            "type": "richtext",
+            "id":"review",
+            "label": "Review"
+        },
+
+        {
+            "type": "text",
+            "id":"customer",
+            "label": "Name of customer"
+        }
+
+    ],
+  
+    "presets": [
+      {
+        "name": "Testimonial",
+        "category": "Text"
+      }
+    ]
+  }
+  {% endschema %}
+  

@@ -1,5 +1,228 @@
-{% comment %}
+<!-- {% comment %}
   The contents of the collection.liquid template can be found in /sections/collection-template.liquid
 {% endcomment %}
 
-{% section 'collection-template' %}
+{% section 'collection-template' %} -->
+
+
+
+<div class="plp-page">
+
+  <h3 class="plp-page_title">{{ collection.title }}</h3>
+
+  <div class="plp-page_navigation">
+       <ul>
+        {% for collection in collections %}
+
+          {% assign url = request.path | replace : "/collections/", "" | replace: '-', ' ' | downcase %}
+          {% assign title = collection.title | downcase %}
+
+          {% if collection.all_products_count != 0 %}
+            <li class="plp-page_navigation-item" >
+              <a class="{% if title == url %} item-active {% endif %}" href="{{ collection.url }}">{{ collection.title }}</a>
+              <span>/</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+       </ul>   
+  </div>
+
+  <div class="plp-page_products">
+
+    {% for product in collection.products %}
+      <div class="plp-page_products-product">
+
+           <div class="plp-page_products-product-tags">
+               <!-- Note: Tag styles (classes), "best-seller", "free-shipping", "pre-order", "sale" -->
+               <span class="tag best-seller">Best Seller</span>
+           </div>
+
+           <!-- Note: add "sold-out" class for overlay -->
+           <div class="plp-page_products-product_image">
+               <img src="{{ product.featured_image | img_url: "master" }}" alt="">
+           </div>
+
+           <a href="{{ product.url }}" class="plp-page_products-product_name" >{{ product.title }}</a>
+
+           <!-- Note: add "sold-out" class for line-through -->
+           <h5 class="plp-page_products-product_price">${{ product.price }}</h5>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<style>
+.plp-page {
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.plp-page_title {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 24px;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: #000000;
+
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.plp-page_navigation {
+    width: 100%;
+    text-align: center;
+
+    margin-top: 35px;
+    margin-bottom: 40px;
+}
+
+.plp-page_navigation > ul { display: inline-flex; }
+.plp-page_navigation-item { list-style: none; color: #C4C4C4 !important; }
+
+.plp-page_navigation-item > a {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 140%;
+    /* identical to box height, or 17px */
+    text-align: center;
+    letter-spacing: 0.175em;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: #C4C4C4 !important;
+    transition: all .3s;
+
+    padding-bottom: 5px;
+}
+.plp-page_navigation-item > span { padding: 0 7px; }
+.plp-page_navigation-item:hover > a { color: #000 !important; }
+
+.plp-page_navigation-item .item-active {
+    border-bottom: 2px solid #C2A578;
+    color: #000 !important;
+}
+
+.plp-page_products {
+
+    padding: 0 40px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    grid-gap: 16px;
+
+}
+
+/* Product Container */
+.plp-page_products-product {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.plp-page_products-product_image img{ width: 100%; object-fit: cover; }
+.plp-page_products-product_image { position: relative; }
+
+.plp-page_products-product_image.sold-out::after { 
+    background: rgba(255, 255, 255, .7);
+    content: '';
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.plp-page_products-product_image.sold-out::before { 
+
+    content: 'Sold Out - Get notified when back in stock';
+    position: absolute;
+    top: 50%; left: 50%;
+
+    width: 70%;
+    transform: translate(-50%);
+    background: #fff;
+    padding: 10px 17px;
+    z-index: 2;
+    /* body-s/regular */
+    font-family: "Open Sans";
+    font-size: 12px;
+    text-align: center;
+    color: #000000;
+
+}
+
+
+.plp-page_products-product_name {
+    font-family: "Oswald";
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 168%;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #000000 !important;
+
+    text-decoration: none;
+    margin-top: 12px;
+}
+
+.plp-page_products-product_price {
+    font-family: "Oswald";
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: #353535 !important;
+    margin: 10px 0;
+}
+
+.plp-page_products-product_price.sold-out {
+    text-decoration: line-through;
+}
+
+.plp-page_products-product-tags {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+
+.plp-page_products-product-tags .tag {
+    padding: 10px 15px;
+    font-family: "Open Sans";
+    font-size: 12px;
+    line-height: 167.5%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.plp-page_products-product-tags .tag.best-seller { color: #fff; background: #000; }
+.plp-page_products-product-tags .tag.free-shipping { color: #000; background: #fff; }
+.plp-page_products-product-tags .tag.pre-order { color: #000; box-shadow:0px 0px 0px 1px #C4C4C4 inset; }
+.plp-page_products-product-tags .tag.sale { color: #fff; background: #9E0404; text-transform: uppercase; }
+
+
+/* Responsive */
+@media screen and ( max-width: 768px ) {
+
+
+    .plp-page_title { font-size: 20px; margin-bottom: 24px; }
+
+    .plp-page_navigation { display: none; }
+
+    .plp-page_products {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .plp-page_products-product_image.sold-out::before {
+        content: "Sold Out - Get Notified";
+        font-size: 12px;
+    }
+
+}
+</style>

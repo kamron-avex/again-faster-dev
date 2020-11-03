@@ -239,7 +239,7 @@
                   {% endform %}
 
                   
-                  {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+                  {%- assign socials = "Facebook Instagram Mail" | split: ' ' -%}
                   {%- if social_icons -%}
                     <ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list" style = 'float: left;margin-top: 26px;'>
                       {%- for social in socials -%}
@@ -247,10 +247,17 @@
                         {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
                         {%- if settings[social_link] != blank -%}
                           <li class="social-icons__item">
+                            {% if social == 'Mail' %}
+                            <a class="social-icons__link" href="mailto:{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
+                              {%- include icon_link -%}
+                              <span class="icon__fallback-text">{{ social }}</span>
+                            </a>
+                            {% else %}
                             <a class="social-icons__link" href="{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
                               {%- include icon_link -%}
                               <span class="icon__fallback-text">{{ social }}</span>
                             </a>
+                            {% endif %}
                           </li>
                         {%- endif -%}
                       {%- endfor -%}

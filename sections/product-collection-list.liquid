@@ -1,18 +1,20 @@
 <div class="product-collection-list container">
     <div class="product-collection-list-row row">
 
+        {% for block in section.blocks limit: section.blocks.size %}
+        {%- assign collection = collections[block.settings.collection] -%}
         <div class="col product-collection-list-row_item">
-            <img src="http://via.placeholder.com/328x334" alt="Product Item">
-            <a href="#" class="product-collection-list-row_item-link" >
-                Bumber Plates
+            <img src="{{ collection.image | img_url: "master" }}" alt="Product Item">
+            <a href="{{ collection.url }}" class="product-collection-list-row_item-link" >
+                {{ collection.title }}
+                <span>{% include 'icon-arrow-right' %}</span>
             </a>
         </div>
+        {% endfor %}
 
-        <div class="col product-collection-list-row_item">2</div>
 
-        <div class="col product-collection-list-row_item">3</div>
-
-        <div class="col product-collection-list-row_item">4</div>
+        
+      
 
     </div>
 </div>
@@ -21,6 +23,7 @@
 <style>
 
 .product-collection-list {
+    margin-bottom: 55px;
 }   
 .product-collection-list-row_item {
     height: 362px;
@@ -31,6 +34,13 @@
 
     flex-direction: column;
 }
+
+.product-collection-list-row_item img {
+    width: 328px;
+    height: 334px;
+
+    object-fit: cover;
+} 
 
 .product-collection-list-row_item-link {
     font-family: "Oswald";
@@ -43,9 +53,29 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
 
-    color: #000000;
+    color: #000000 !important;
 
     margin-top: 12px;
+
+    position: relative;
+}
+
+.product-collection-list-row_item-link > span {
+    visibility: hidden;
+    opacity: 0;
+    
+    position: absolute;
+
+    right: 0px;
+
+    transition: all .3s;
+}
+
+.product-collection-list-row_item-link:hover > span {
+    visibility: visible;
+    opacity: 1;
+
+    right: -25px;
 }
 
 /* Responsive */
